@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Happy Birthday Zach! 🎉</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+            color: white;
+            font-family: system-ui, -apple-system, sans-serif;
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+
+        .hero {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .title {
+            font-size: 5rem;
+            font-weight: bold;
+            margin: 0;
+            text-align: center;
+            background: linear-gradient(45deg, #ec3750, #ff8c37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0;
+            transform: scale(0.5);
+        }
+
+        .subtitle {
+            font-size: 2rem;
+            margin: 1rem 0;
+            opacity: 0;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ec3750;
+            border-radius: 50%;
+        }
+
+        .hack-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            width: 100%;
+            opacity: 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: rotate(45deg);
+            transition: 0.5s;
+        }
+
+        .stat-card:hover::before {
+            top: 100%;
+            left: 100%;
+        }
+
+        .number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 0;
+            background: linear-gradient(45deg, #ec3750, #ff8c37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .message-board {
+            max-width: 800px;
+            width: 90%;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            opacity: 0;
+            transform-style: preserve-3d;
+        }
+
+        .message {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+            border-left: 4px solid #ec3750;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .message:hover {
+            transform: translateX(10px) scale(1.02);
+        }
+
+        .surprise-button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            background: linear-gradient(45deg, #ec3750, #ff8c37);
+            border: none;
+            border-radius: 2rem;
+            color: white;
+            cursor: pointer;
+            margin: 2rem;
+            transition: transform 0.3s ease;
+            opacity: 0;
+        }
+
+        .surprise-button:hover {
+            transform: scale(1.1);
+        }
+
+        .hack-logo {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+            100% { transform: translateY(0px) rotate(360deg); }
+        }
+
+        .floating-emoji {
+            position: absolute;
+            font-size: 2rem;
+            pointer-events: none;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        .matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.1;
+        }
+    </style>
+</head>
+<body>
+    <canvas class="matrix-rain"></canvas>
+    <div class="hero">
+        <h1 class="title">Happy Birthday Zach! 🎉</h1>
+        <p class="subtitle">Founder of Hack Club & Champion of Young Hackers</p>
+        <button class="surprise-button">Click for a Surprise! 🎁</button>
+    </div>
+
+    <div class="hack-stats">
+        <div class="stat-card">
+            <h3 class="number" data-value="300">0</h3>
+            <p>Hack Clubs Worldwide</p>
+        </div>
+        <div class="stat-card">
+            <h3 class="number" data-value="20000">0</h3>
+            <p>Young Hackers Inspired</p>
+        </div>
+        <div class="stat-card">
+            <h3 class="number">∞</h3>
+            <p>Lines of Code Shipped</p>
+        </div>
+    </div>
+
+    <div class="message-board">
+        <h2>Birthday Messages from the Community</h2>
+        <div class="message">
+            "Thank you for creating a space where young hackers can thrive and build amazing things! 🚀"
+        </div>
+        <div class="message">
+            "Your vision for empowering students through technology has changed countless lives! 💻"
+        </div>
+        <div class="message">
+            "Here's to many more years of shipping code and building the future! 🎂"
+        </div>
+    </div>
+
+    <script>
+        // Matrix rain effect
+        const canvas = document.querySelector('.matrix-rain');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const chars = '01HACKCLUB';
+        const drops = [];
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        
+        for(let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+        
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#ec3750';
+            ctx.font = fontSize + 'px monospace';
+            
+            for(let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        // Animate numbers
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Create floating emojis
+        function createFloatingEmoji() {
+            const emojis = ['🎉', '🎈', '🎂', '💻', '🚀', '⚡️'];
+            const emoji = document.createElement('div');
+            emoji.className = 'floating-emoji';
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * window.innerWidth + 'px';
+            emoji.style.top = Math.random() * window.innerHeight + 'px';
+            document.body.appendChild(emoji);
+            
+            setTimeout(() => {
+                emoji.remove();
+            }, 3000);
+        }
+
+        // Surprise button handler
+        document.querySelector('.surprise-button').addEventListener('click', () => {
+            // Create multiple emojis
+            for(let i = 0; i < 20; i++) {
+                setTimeout(createFloatingEmoji, i * 100);
+            }
+            
+            // Shake everything
+            gsap.to('.hero, .hack-stats, .message-board', {
+                rotation: 'random(-5, 5)',
+                duration: 0.1,
+                yoyo: true,
+                repeat: 5
+            });
+            
+            // Flash background
+            gsap.to('body', {
+                background: 'linear-gradient(45deg, #ec3750, #ff8c37)',
+                duration: 0.2,
+                yoyo: true,
+                repeat: 1
+            });
+        });
+
+        // Initial animations
+        gsap.to('.title', {
+            opacity: 1,
+            scale: 1,
+            duration: 1,
+            ease: 'elastic.out(1, 0.3)'
+        });
+
+        gsap.to('.subtitle', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 0.3,
+            ease: 'power4.out'
+        });
+
+        gsap.to('.surprise-button', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 0.6,
+            ease: 'power4.out'
+        });
+
+        gsap.to('.hack-stats', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 0.6,
+            ease: 'power4.out'
+        });
+
+        gsap.to('.message-board', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 0.9,
+            ease: 'power4.out'
+        });
+
+        // Start matrix rain
+        setInterval(drawMatrix, 50);
+
+        // Animate numbers on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = entry.target;
+                    const value = parseInt(target.dataset.value);
+                    if (value) {
+                        animateValue(target, 0, value, 2000);
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('.number').forEach(number => {
+            observer.observe(number);
+        });
+
+        // Create initial confetti burst
+        for (let i = 0; i < 50; i++) {
+            setTimeout(createFloatingEmoji, i * 100);
+        }
+
+        // Make messages pop on hover
+        document.querySelectorAll('.message').forEach(message => {
+            message.addEventListener('mouseover', () => {
+                gsap.to(message, {
+                    scale: 1.05,
+                    duration: 0.2
+                });
+            });
+            
+            message.addEventListener('mouseout', () => {
+                gsap.to(message, {
+                    scale: 1,
+                    duration: 0.2
+                });
+            });
+        });
+    </script>
+</body>
+</html>
